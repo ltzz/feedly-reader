@@ -1,0 +1,19 @@
+{
+    "editor.formatOnSave": false, // デフォルトのコード整形を無効化
+    "eslint.options": {
+        "extensions": [".js", ".vue"]
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "vue",
+            "autoFix": true,
+        },
+    ],
+    "eslint.autoFixOnSave": true,
+    "prettier.eslintIntegration": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+}

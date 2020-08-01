@@ -1,0 +1,20 @@
+{
+  "exclude": [
+    "vendor",
+    "/node_modules/"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.js",
+    "**/*.vue"
+  ],
+  "compilerOptions": {
+    "target": "es6",
+    "allowJs": true,                       /* Allow javascript files to be compiled. */
+    "sourceMap": true,                     /* Generates corresponding '.map' file. */
+    "strict": true,                           /* Enable all strict type-checking options. */
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
+}
