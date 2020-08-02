@@ -7,16 +7,19 @@
     <div @click="testSend">
       送受信テスト
     </div>
+    <List />
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import List from './components/List.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    List
   },
   computed: {
 
