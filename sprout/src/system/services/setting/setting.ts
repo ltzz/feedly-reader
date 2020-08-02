@@ -1,4 +1,4 @@
-const fs = require('fs')
+import fs from 'fs'
 
 const loadSetting = ():object => {
   const json = JSON.parse(fs.readFileSync('./input.json', 'utf8'))

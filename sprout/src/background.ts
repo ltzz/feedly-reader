@@ -1,9 +1,10 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'  
 import { saveSetting } from './system/services/setting/setting'
+import { getJson } from './system/services/http/apiClient'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -15,6 +16,25 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
+ipcMain.on('asynchronous-message', (event, arg) => {
+  // console.log(arg)
+  
+  // JSON取得
+  let result = null
+  Promise.all([testReq()]).then((values) => {
+    console.log(values[0].data)
+    result = values[0].data
+    event.reply('asynchronous-reply', JSON.stringify(result))
+  }).catch((error) => {
+    console.error(error)
+  })
+
+})
+
+async function testReq(){
+  return await getJson('')
+}
+
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
@@ -23,7 +43,9 @@ function createWindow() {
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: !!process.env.ELECTRON_NODE_INTEGRATION
+      // nodeIntegration: !!process.env.ELECTRON_NODE_INTEGRATION
+      // FIXME: 暫定対応 https://github.com/electron/electron/issues/24005#issuecomment-643705734
+      nodeIntegration: true
     }
   })
 

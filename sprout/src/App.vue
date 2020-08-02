@@ -4,6 +4,9 @@
       alt="Vue logo"
       src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div @click="testSend">
+      送受信テスト
+    </div>
   </div>
 </template>
 
@@ -14,7 +17,23 @@ export default {
   name: 'App',
   components: {
     HelloWorld
-  }, computed: {}
+  },
+  computed: {
+
+  },
+  methods: {
+    testSend(){
+      // FIXME: 暫定対応 https://github.com/electron/electron/issues/24005#issuecomment-643705734
+      const {ipcRenderer} = window.require('electron')
+      ipcRenderer.send('asynchronous-message')
+
+      ipcRenderer.on('asynchronous-reply', (e, data) => {
+        const responseObject = JSON.parse(data)
+        if (responseObject === null) return
+        console.log(JSON.parse(data).items.map(item => item.title))
+      })
+    }
+  }
 }
 </script>
 
