@@ -2,12 +2,13 @@
 
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'  
+import { saveSetting } from './system/services/setting/setting'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win
+let win: BrowserWindow | null
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -22,7 +23,7 @@ function createWindow() {
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION
+      nodeIntegration: !!process.env.ELECTRON_NODE_INTEGRATION
     }
   })
 
@@ -75,6 +76,7 @@ app.on('ready', async () => {
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
+
   if (process.platform === 'win32') {
     process.on('message', (data) => {
       if (data === 'graceful-exit') {
