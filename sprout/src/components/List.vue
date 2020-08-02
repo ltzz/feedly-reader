@@ -1,10 +1,10 @@
 <template>
   <div>
     <div
-      v-for="(key, index) in list"
+      v-for="(key, index) in unreadItems"
       :key="index"
       class="ListBox_Item">
-      {{ list[index] }}
+      {{ unreadItems[index].website }} - {{ unreadItems[index].title }}
     </div>
   </div>
 </template>
@@ -13,9 +13,18 @@
 
 export default {
   name: 'List',
-  computed: {
-    list: () => {
-      return ['aaa', 'bbb']
+  props: {
+    items: {
+      required: true,
+      type: Array
+    }
+  },
+  computed: { 
+    unreadItems(){
+      console.log('aaa')
+      return this.items.filter(
+        item => item.unread
+      )
     }
   }
 }
@@ -25,7 +34,8 @@ export default {
 .ListBox_Item {
     border: solid #cccccc;
     border-width:1px 1px 0px 1px;
-    height: 80px;
+    height: 50px;
+    font-weight: 500;
 }
 .ListBox_Item:last-child {
     border-width:1px 1px 1px 1px;
