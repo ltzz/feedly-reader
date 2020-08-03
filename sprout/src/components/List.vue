@@ -3,7 +3,8 @@
     <div
       v-for="(key, index) in unreadItems"
       :key="index"
-      class="ListBox_Item">
+      class="ListBox_Item"
+      @click="setWebviewUrl(unreadItems[index].url)">
       {{ unreadItems[index].website }} - {{ unreadItems[index].title }}
     </div>
   </div>
@@ -17,11 +18,14 @@ export default {
     items: {
       required: true,
       type: Array
+    },
+    setWebviewUrl: {
+      required: true,
+      type: Function
     }
   },
   computed: { 
     unreadItems(){
-      console.log('aaa')
       return this.items.filter(
         item => item.unread
       )

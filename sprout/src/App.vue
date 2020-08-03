@@ -1,34 +1,42 @@
 <template>
   <div id="app">
-    <img
-      alt="Vue logo"
-      src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <div
-      class="TestButton_button"
-      @click="testSend">
-      送受信テストボタン
+    <div class="ContentWrapper">
+      <div
+        class="TestButton_button"
+        @click="testSend">
+        送受信テストボタン
+      </div>
+      <div class="Conteiner_container">
+        <div class="Conteiner_column -width400">
+          <List
+            v-if="initialized"
+            :items="items"
+            :set-webview-url="setWebviewUrl" />
+        </div>
+        <div class="Conteiner_column -webview">
+          <WebViewWrapper
+            :url="webviewUrl" />
+        </div>
+      </div>
     </div>
-    <List
-      v-if="initialized"
-      :items="items" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import List from './components/List.vue'
+import WebViewWrapper from './components/WebViewWrapper.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    List
+    List,
+    WebViewWrapper
   },
   data() {
     return {
       items: (() => [])(),
-      initialized: false
+      initialized: false,
+      webviewUrl: 'about:blank'
     }
   },
   computed: {
@@ -47,7 +55,8 @@ export default {
           return {
             website: item.origin.title,
             title: item.title,
-            unread: item.unread
+            unread: item.unread,
+            url: item.canonicalUrl
           }
         })
         console.log(responseObject)
@@ -55,6 +64,9 @@ export default {
         this.items = dataItems
         this.initialized = true
       })
+    },
+    setWebviewUrl(url){
+      this.webviewUrl = url
     }
   }
 }
@@ -64,6 +76,39 @@ export default {
 
 .TestButton_button {
   border: 1px solid #cccccc
+}
+
+.ContentWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.Conteiner_container {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.-width400 {
+  width: 400px;
+}
+
+.-webview {
+  flex-grow: 2;
+}
+
+.Conteiner_column {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@media screen and (max-width: 767px) {
+  .Conteiner_column {
+    flex-direction: row;
+  }
 }
 
 #app {

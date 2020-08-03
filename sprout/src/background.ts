@@ -45,7 +45,8 @@ function createWindow() {
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       // nodeIntegration: !!process.env.ELECTRON_NODE_INTEGRATION
       // FIXME: 暫定対応 https://github.com/electron/electron/issues/24005#issuecomment-643705734
-      nodeIntegration: true
+      nodeIntegration: true,
+      webviewTag: true
     }
   })
 
