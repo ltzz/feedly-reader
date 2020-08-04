@@ -5,7 +5,10 @@
       :key="index"
       class="ListBox_Item"
       @click="setWebviewUrl(unreadItems[index].url)">
-      {{ unreadItems[index].website }} - {{ unreadItems[index].title }}
+      <div class="Text -fz8">
+        {{ unreadItems[index].website }}
+      </div>
+      <div>{{ unreadItems[index].title }}</div>
     </div>
   </div>
 </template>
@@ -40,6 +43,7 @@ export default {
     border-width:1px 1px 0px 1px;
     height: 50px;
     font-weight: 500;
+    overflow: hidden;
 }
 .ListBox_Item:last-child {
     border-width:1px 1px 1px 1px;

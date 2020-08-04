@@ -74,6 +74,8 @@ export default {
 
 <style>
 
+@import "./css/util.css";
+
 .TestButton_button {
   border: 1px solid #cccccc
 }
