@@ -44,6 +44,7 @@ export default {
     height: 50px;
     font-weight: 500;
     overflow: hidden;
+    white-space: nowrap;
 }
 .ListBox_Item:last-child {
     border-width:1px 1px 1px 1px;

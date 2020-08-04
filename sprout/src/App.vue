@@ -7,7 +7,7 @@
         送受信テストボタン
       </div>
       <div class="Conteiner_container">
-        <div class="Conteiner_column -width400">
+        <div class="Conteiner_column -feedList">
           <List
             v-if="initialized"
             :items="items"
@@ -74,7 +74,7 @@ export default {
 
 <style>
 
-@import "./css/util.css";
+@import "./assets/css/util.css";
 
 .TestButton_button {
   border: 1px solid #cccccc
@@ -94,7 +94,8 @@ export default {
   height: 100%;
 }
 
-.-width400 {
+.-feedList {
+  overflow-y: scroll;
   width: 400px;
 }
 
