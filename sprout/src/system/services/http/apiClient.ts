@@ -1,10 +1,6 @@
 import axiosBase from 'axios'
-import { accessToken, userId } from '../dev/secret'
 
-const baseUrl = 'https://cloud.feedly.com'
-
-const getJson = async (url: string) => {
-  const streamId = encodeURI(`user/${userId}/category/global.all`)
+const getJson = async (baseUrl: string, url: string, accessToken: string) => {
   const axios = axiosBase.create({
     baseURL: baseUrl,
     headers: {
@@ -12,7 +8,7 @@ const getJson = async (url: string) => {
       'Authorization': 'Bearer ' + accessToken
     }
   })
-  const res = await axios.get(`/v3/streams/contents?streamId=${streamId}`)
+  const res = await axios.get(url)
   return res
 }
 

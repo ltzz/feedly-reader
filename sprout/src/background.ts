@@ -4,7 +4,7 @@ import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'  
 import { saveSetting } from './system/services/setting/setting'
-import { getJson } from './system/services/http/apiClient'
+import { getFeedlyStream } from './system/services/feedly'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -32,7 +32,7 @@ ipcMain.on('asynchronous-message', (event, arg) => {
 })
 
 async function testReq(){
-  return await getJson('')
+  return await getFeedlyStream()
 }
 
 function createWindow() {
